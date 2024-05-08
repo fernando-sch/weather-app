@@ -39,6 +39,3 @@ export const SearchButton = styled.button`
     cursor: pointer;
   }
 `;
-
-// #62ACF5
-// #F6F6F6
