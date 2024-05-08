@@ -5,7 +5,6 @@ import {
   startMockServer,
 } from "@/__tests__/helpers";
 import { useGetCityLocation } from "@/geolocation/hooks/use-get-city-location";
-import { act } from "react";
 
 describe("useGetCityLocation", () => {
   let server: ReturnType<typeof startMockServer>;
