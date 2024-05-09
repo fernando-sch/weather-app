@@ -11,7 +11,7 @@ type RemoteMainObj = {
   humidity: number;
 };
 
-type RemoteWeather = {
+export type RemoteWeather = {
   weather: RemoteWeatherObj[];
   main: RemoteMainObj;
   name: string;
