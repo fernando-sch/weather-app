@@ -21,6 +21,25 @@ export const startMockServer = () => {
           },
         ];
       });
+
+      this.get("/data/2.5/weather", () => {
+        return {
+          weather: [
+            {
+              description: "nublado",
+              icon: "04n",
+            },
+          ],
+          main: {
+            temp: 22.18,
+            feels_like: 22.26,
+            temp_min: 20.05,
+            temp_max: 24.1,
+            humidity: 69,
+          },
+          name: "Curitiba",
+        }
+      })
     },
   });
 };
