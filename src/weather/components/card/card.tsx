@@ -19,10 +19,10 @@ export const WeatherCard = ({
 }: WeatherCardProps) => {
   return (
     <WeatherCardWrapper>
-      <CurrentTemperature>{temp}°C</CurrentTemperature>
+      <CurrentTemperature>{temp}</CurrentTemperature>
       <MoreInfoWrapper>
         <Description>{description}</Description>
-        <MaxTemperature>Max Temp: {tempmax}°C</MaxTemperature>
+        <MaxTemperature>Max Temp: {tempmax}</MaxTemperature>
       </MoreInfoWrapper>
     </WeatherCardWrapper>
   );
