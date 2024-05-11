@@ -1,9 +1,17 @@
-import { LocateCityPage } from "@/geolocation/pages/locate-city";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { LocateCityPage } from "@/geolocation/pages/locate-city";
+import { CityWeather } from "@/weather/pages/city-weather";
 
 export const AppRouterProvider = () => {
   const router = createBrowserRouter([
-    { path: "/", element: <LocateCityPage /> },
+    {
+      path: "/",
+      element: <LocateCityPage />,
+    },
+    {
+      path: "weather/:cityName",
+      element: <CityWeather />,
+    },
   ]);
 
   return <RouterProvider router={router} />;
