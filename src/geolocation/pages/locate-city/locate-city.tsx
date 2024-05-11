@@ -1,4 +1,4 @@
-import { LocateCityForm } from "@/geolocation/components/locate-city-form";
+import { CityForm } from "@/geolocation/components/city-form";
 import {
   MainWrapper,
   HeaderWrapper,
@@ -11,7 +11,7 @@ export const LocateCityPage = () => {
       <HeaderWrapper>
         <Title>Weather App</Title>
       </HeaderWrapper>
-      <LocateCityForm />
+      <CityForm />
     </MainWrapper>
   );
 };

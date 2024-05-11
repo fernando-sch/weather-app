@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import type { Preview } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { startMockServer } from "../src/__tests__/helpers";

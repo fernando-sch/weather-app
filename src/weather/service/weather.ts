@@ -6,8 +6,8 @@ export class WeatherService {
   #axiosIntance: AxiosInstance = axiosInstance;
 
   async getLocationWeather(
-    lat: number,
-    lon: number
+    lat?: string,
+    lon?: string
   ): Promise<AxiosResponse<RemoteWeather>> {
     const defaultParams = { units: "metric", lang: "pt_br" };
     const params = { lat, lon, appid: envObject.apiKey, ...defaultParams };

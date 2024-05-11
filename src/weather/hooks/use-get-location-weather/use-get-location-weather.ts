@@ -1,8 +1,9 @@
-import { buildWeatherDTO } from "@/weather/dto";
-import { WeatherService } from "@/weather/service";
 import { useQuery } from "@tanstack/react-query";
+import { WeatherService } from "@/weather/service";
+import { buildWeatherDTO } from "@/weather/dto";
 
-export const useGetLocationWeather = (lat: number, lon: number) => {
+export const useGetLocationWeather = (lat?: string, lon?: string) => {
+  const isEnabled = !!lat && !!lon;
   const weatherService = new WeatherService();
 
   const getLocationWeather = async () => {
@@ -14,5 +15,6 @@ export const useGetLocationWeather = (lat: number, lon: number) => {
   return useQuery({
     queryKey: ["locationWeather", lat, lon],
     queryFn: getLocationWeather,
+    enabled: isEnabled,
   });
 };

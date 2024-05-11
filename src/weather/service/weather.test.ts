@@ -15,7 +15,7 @@ describe("WeatherService", () => {
 
   suite("getLocationWeather", () => {
     it("should return location weather", async () => {
-      const [lat, lon] = [-25.4295963, -49.2712724];
+      const [lat, lon] = ["-25.4295963", "-49.2712724"];
       const weatherService = new WeatherService();
 
       const { data } = await weatherService.getLocationWeather(lat, lon);

@@ -18,8 +18,8 @@ describe("buildGeolocationDTO", () => {
 
     expect(geolocation).toBeInstanceOf(Geolocation);
     expect(geolocation.country).toBe(remoteGeolocation.country);
-    expect(geolocation.lat).toBe(remoteGeolocation.lat);
-    expect(geolocation.lon).toBe(remoteGeolocation.lon);
+    expect(geolocation.lat).toBe(remoteGeolocation.lat.toString());
+    expect(geolocation.lon).toBe(remoteGeolocation.lon.toString());
     expect(geolocation.name).toBe(remoteGeolocation.name);
     expect(geolocation.state).toBe(remoteGeolocation.state);
   });

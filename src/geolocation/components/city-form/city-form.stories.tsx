@@ -1,16 +1,18 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
-import { LocateCityPage } from "@/geolocation/pages/locate-city";
+import { CityForm } from "@/geolocation/components/city-form";
 
-const meta: Meta<typeof LocateCityPage> = { component: LocateCityPage };
+const meta: Meta<typeof CityForm> = {
+  component: CityForm,
+};
 
 export default meta;
-type Story = StoryObj<typeof LocateCityPage>;
+type Story = StoryObj<typeof CityForm>;
 
 export const Default: Story = {
   render: () => (
     <MemoryRouter>
-      <LocateCityPage />
+      <CityForm />
     </MemoryRouter>
   ),
 };
