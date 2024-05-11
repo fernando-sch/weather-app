@@ -7,14 +7,14 @@ export type RemoteGeolocation = {
 
 export class Geolocation {
   country = "BR";
-  lat: number;
-  lon: number;
+  lat: string;
+  lon: string;
   name: string;
   state: string;
 
   constructor(private readonly remoteGeolocation: RemoteGeolocation) {
-    this.lat = this.remoteGeolocation.lat;
-    this.lon = this.remoteGeolocation.lon;
+    this.lat = this.remoteGeolocation.lat.toString();
+    this.lon = this.remoteGeolocation.lon.toString();
     this.name = this.remoteGeolocation.name;
     this.state = this.remoteGeolocation.state;
   }
