@@ -26,9 +26,14 @@ export const CityWeather = () => {
       <WeatherCardWrapper>
         {locationWeather ? (
           <WeatherCard
-            description={locationWeather?.description}
-            temp={locationWeather?.formattedTemp}
-            tempmax={locationWeather?.formattedMaxTemp}
+            description={locationWeather.description}
+            temp={locationWeather.formattedTemp}
+            maxtemp={locationWeather.formattedMaxTemp}
+            mintemp={locationWeather.formattedMinTemp}
+            fellsliketemp={locationWeather.formattedFeelsLikeTemp}
+            humidity={locationWeather.formattedHumidity}
+            cityname={locationWeather.cityName}
+            icon={locationWeather.icon}
           />
         ) : (
           <Loading>Carregando...</Loading>

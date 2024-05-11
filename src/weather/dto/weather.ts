@@ -31,10 +31,10 @@ export class Weather {
     this.cityName = this.remoteWeather.name;
     this.description = this.remoteWeather.weather[0].description;
     this.icon = this.remoteWeather.weather[0].icon;
-    this.temp = this.remoteWeather.main.temp;
-    this.feelsLikeTemp = this.remoteWeather.main.feels_like;
-    this.minTemp = this.remoteWeather.main.temp_min;
-    this.maxTemp = this.remoteWeather.main.temp_max;
+    this.temp = Math.round(this.remoteWeather.main.temp);
+    this.feelsLikeTemp = Math.round(this.remoteWeather.main.feels_like);
+    this.minTemp = Math.round(this.remoteWeather.main.temp_min);
+    this.maxTemp = Math.round(this.remoteWeather.main.temp_max);
     this.humidity = this.remoteWeather.main.humidity;
   }
 
