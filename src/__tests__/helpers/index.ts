@@ -1,2 +1,2 @@
 export * from "./mock-server";
-export * from "./render-with-query-provider";
+export * from "./render-wrappers";
