@@ -1,9 +1,9 @@
-import { buildGeolocationDTO } from "@/geolocation/dto";
-import { GeolocationService } from "@/geolocation/service";
 import { useQuery } from "@tanstack/react-query";
+import { Geolocation, buildGeolocationDTO } from "@/geolocation/dto";
+import { GeolocationService } from "@/geolocation/service";
 
 export const useGetCityLocation = (cityName?: string) => {
-  const hasCityName = !!cityName
+  const hasCityName = !!cityName;
   const geolocationService = new GeolocationService();
 
   const getCityLocation = async () => {
@@ -14,7 +14,7 @@ export const useGetCityLocation = (cityName?: string) => {
       );
   };
 
-  return useQuery({
+  return useQuery<Geolocation>({
     queryKey: ["getCityLocation", cityName],
     queryFn: getCityLocation,
     enabled: hasCityName,

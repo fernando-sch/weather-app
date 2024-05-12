@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { WeatherService } from "@/weather/service";
-import { buildWeatherDTO } from "@/weather/dto";
+import { Weather, buildWeatherDTO } from "@/weather/dto";
 
 export const useGetLocationWeather = (lat?: string, lon?: string) => {
   const isEnabled = !!lat && !!lon;
@@ -12,7 +12,7 @@ export const useGetLocationWeather = (lat?: string, lon?: string) => {
       .then(({ data }) => buildWeatherDTO(data));
   };
 
-  return useQuery({
+  return useQuery<Weather>({
     queryKey: ["locationWeather", lat, lon],
     queryFn: getLocationWeather,
     enabled: isEnabled,
