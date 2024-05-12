@@ -25,7 +25,7 @@ type WeatherCardProps = {
   cityname: string;
   description: string;
   humidity: string;
-  icon: string;
+  iconSrc: string;
 };
 
 export const WeatherCard = ({
@@ -36,14 +36,12 @@ export const WeatherCard = ({
   cityname,
   description,
   humidity,
-  icon,
+  iconSrc,
 }: WeatherCardProps) => {
-  const weatherIconSrc = `https://openweathermap.org/img/wn/${icon}@2x.png`;
-
   return (
     <WeatherCardWrapper>
       <MainInfoWrapper>
-        <img src={weatherIconSrc} />
+        <img src={iconSrc} />
         <CurrentTemperature>{temp}</CurrentTemperature>
         <Description>{description}</Description>
         <IconWrapper>

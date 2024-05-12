@@ -13,7 +13,7 @@ describe("WeatherCard", () => {
         description="Chuva moderada"
         cityname="Curitiba"
         humidity="56%"
-        icon="10n"
+        iconSrc="https://openweathermap.org/img/wn/10n@2x.png"
       />
     );
 
@@ -24,5 +24,6 @@ describe("WeatherCard", () => {
     expect(screen.getByText(/56%/)).toBeDefined();
     expect(screen.getByText(/Curitiba/)).toBeDefined();
     expect(screen.getByText(/Chuva moderada/)).toBeDefined();
+    expect(screen.getByRole("img")).toBeDefined();
   });
 });
