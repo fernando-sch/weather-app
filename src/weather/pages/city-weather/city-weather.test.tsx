@@ -33,8 +33,12 @@ describe("CityWeather", () => {
     await waitFor(() => {
       expect(screen.getByText(/Weather App/)).toBeDefined();
       expect(screen.getByText(/nublado/)).toBeDefined();
-      expect(screen.getByText(/24.1°C/)).toBeDefined();
-      expect(screen.getByText(/22.18°C/)).toBeDefined();
+      expect(screen.getByText(/20°C/)).toBeDefined();
+      expect(screen.getByText(/24°C/)).toBeDefined();
+      expect(screen.getByText(/22°C/)).toBeDefined();
+      expect(screen.getByText(/23°C/)).toBeDefined();
+      expect(screen.getByText(/69%/)).toBeDefined();
+      expect(screen.getByText(/Curitiba/)).toBeDefined();
     });
   });
 });
