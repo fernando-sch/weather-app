@@ -57,6 +57,10 @@ export class Weather {
   get formattedHumidity() {
     return `${this.humidity}%`;
   }
+
+  get iconSrc() {
+    return `https://openweathermap.org/img/wn/${this.icon}@2x.png`;
+  }
 }
 
 export const buildWeatherDTO = (remoteWeather: RemoteWeather) =>

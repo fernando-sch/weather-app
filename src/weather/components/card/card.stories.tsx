@@ -15,6 +15,6 @@ export const Default: Story = {
     description: "Chuva moderada",
     cityname: "Curitiba",
     humidity: "56%",
-    icon: "10n",
+    iconSrc: "https://openweathermap.org/img/wn/10n@2x.png",
   },
 };

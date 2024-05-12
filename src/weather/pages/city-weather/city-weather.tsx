@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { RiArrowLeftSLine } from "react-icons/ri";
 import { useGetCityLocation } from "@/geolocation/hooks/use-get-city-location";
 import { WeatherCard } from "@/weather/components/card";
 import { useGetLocationWeather } from "@/weather/hooks/use-get-location-weather";
@@ -11,16 +12,20 @@ import {
 } from "@/weather/pages/city-weather/city-weather.styles";
 
 export const CityWeather = () => {
+  const navigate = useNavigate();
   const { cityName } = useParams();
-  const { data: cityData } = useGetCityLocation(cityName);
+  const { data: cityLocation } = useGetCityLocation(cityName);
   const { data: locationWeather } = useGetLocationWeather(
-    cityData?.lat,
-    cityData?.lon
+    cityLocation?.lat,
+    cityLocation?.lon
   );
+
+  const handleGoBack = () => navigate(-1);
 
   return (
     <MainWrapper>
       <HeaderWrapper>
+        <RiArrowLeftSLine onClick={handleGoBack} />
         <Title>Weather App</Title>
       </HeaderWrapper>
       <WeatherCardWrapper>
@@ -33,7 +38,7 @@ export const CityWeather = () => {
             fellsliketemp={locationWeather.formattedFeelsLikeTemp}
             humidity={locationWeather.formattedHumidity}
             cityname={locationWeather.cityName}
-            icon={locationWeather.icon}
+            iconSrc={locationWeather.iconSrc}
           />
         ) : (
           <Loading>Carregando...</Loading>

@@ -11,10 +11,10 @@ describe("buildWeatherDTO", () => {
         },
       ],
       main: {
-        temp: 22.18,
-        feels_like: 22.26,
-        temp_min: 20.05,
-        temp_max: 24.1,
+        temp: 22,
+        feels_like: 22,
+        temp_min: 20,
+        temp_max: 24,
         humidity: 69,
       },
       name: "Curitiba",
@@ -33,5 +33,8 @@ describe("buildWeatherDTO", () => {
     expect(weather.description).toBe(remoteWeather.weather[0].description);
     expect(weather.icon).toBe(remoteWeather.weather[0].icon);
     expect(weather.cityName).toBe(remoteWeather.name);
+    expect(weather.iconSrc).toBe(
+      `https://openweathermap.org/img/wn/${remoteWeather.weather[0].icon}@2x.png`
+    );
   });
 });
