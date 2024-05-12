@@ -1,13 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { waitFor } from "@testing-library/react";
-import { renderCustomHook, startMockServer } from "@/__tests__/helpers";
+import {
+  renderCustomHook,
+  startOpenWeatherMockServer,
+} from "@/__tests__/helpers";
 import { useGetCityLocation } from "@/geolocation/hooks/use-get-city-location";
 
 describe("useGetCityLocation", () => {
-  let server: ReturnType<typeof startMockServer>;
+  let server: ReturnType<typeof startOpenWeatherMockServer>;
 
   beforeEach(() => {
-    server = startMockServer();
+    server = startOpenWeatherMockServer();
   });
 
   afterEach(() => {

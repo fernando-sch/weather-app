@@ -1,7 +1,7 @@
 import { createServer } from "miragejs";
 import { envObject } from "@/config";
 
-export const startMockServer = () => {
+export const startOpenWeatherMockServer = () => {
   return createServer({
     environment: "test",
     routes() {
@@ -38,8 +38,87 @@ export const startMockServer = () => {
             humidity: 69,
           },
           name: "Curitiba",
-        }
-      })
+        };
+      });
+    },
+  });
+};
+
+export const startIBGEMockServer = () => {
+  return createServer({
+    environment: "test",
+    routes() {
+      this.urlPrefix = envObject.ibgeApi;
+
+      this.get("/localidades/municipios", () => {
+        return [
+          {
+            nome: "Alta Floresta D'Oeste",
+            microrregiao: {
+              nome: "Cacoal",
+              mesorregiao: {
+                nome: "Leste Rondoniense",
+                UF: {
+                  sigla: "RO",
+                  nome: "Rondônia",
+                },
+              },
+            },
+          },
+          {
+            nome: "Ariquemes",
+            microrregiao: {
+              nome: "Ariquemes",
+              mesorregiao: {
+                nome: "Leste Rondoniense",
+                UF: {
+                  sigla: "RO",
+                  nome: "Rondônia",
+                },
+              },
+            },
+          },
+          {
+            nome: "Cabixi",
+            microrregiao: {
+              nome: "Colorado do Oeste",
+              mesorregiao: {
+                nome: "Leste Rondoniense",
+                UF: {
+                  sigla: "RO",
+                  nome: "Rondônia",
+                },
+              },
+            },
+          },
+          {
+            nome: "Cacoal",
+            microrregiao: {
+              nome: "Cacoal",
+              mesorregiao: {
+                nome: "Leste Rondoniense",
+                UF: {
+                  sigla: "RO",
+                  nome: "Rondônia",
+                },
+              },
+            },
+          },
+          {
+            nome: "Cerejeiras",
+            microrregiao: {
+              nome: "Colorado do Oeste",
+              mesorregiao: {
+                nome: "Leste Rondoniense",
+                UF: {
+                  sigla: "RO",
+                  nome: "Rondônia",
+                },
+              },
+            },
+          },
+        ];
+      });
     },
   });
 };

@@ -1,12 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { startMockServer } from "@/__tests__/helpers";
+import { startOpenWeatherMockServer } from "@/__tests__/helpers";
 import { GeolocationService } from "@/geolocation/service";
 
 describe("GeolocationService", () => {
-  let server: ReturnType<typeof startMockServer>;
+  let server: ReturnType<typeof startOpenWeatherMockServer>;
 
   beforeEach(() => {
-    server = startMockServer();
+    server = startOpenWeatherMockServer();
   });
 
   afterEach(() => {
