@@ -2,13 +2,16 @@ import { describe, it, expect } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CityForm } from "@/geolocation/components/city-form";
-import { renderComponent, startMockServer } from "@/__tests__/helpers";
+import {
+  renderComponent,
+  startOpenWeatherMockServer,
+} from "@/__tests__/helpers";
 
 describe("CityForm", () => {
-  let server: ReturnType<typeof startMockServer>;
+  let server: ReturnType<typeof startOpenWeatherMockServer>;
 
   beforeEach(() => {
-    server = startMockServer();
+    server = startOpenWeatherMockServer();
   });
 
   afterEach(() => {

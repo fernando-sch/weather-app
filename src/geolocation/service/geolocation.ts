@@ -1,15 +1,17 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import { axiosInstance, envObject } from "@/config";
+import { openWeatherAxiosInstance, envObject } from "@/config";
 import { RemoteGeolocation } from "@/geolocation/dto";
 
 export class GeolocationService {
-  #axiosInstance: AxiosInstance = axiosInstance;
+  #axiosInstance: AxiosInstance = openWeatherAxiosInstance;
 
   async getCityLocation(
     searchParam?: string,
     limit: string = "1"
   ): Promise<AxiosResponse<RemoteGeolocation[]>> {
     const params = { q: searchParam, appid: envObject.apiKey, limit };
-    return await this.#axiosInstance.get("/geo/1.0/direct", { params });
+    return await this.#axiosInstance.get("/geo/1.0/direct", {
+      params,
+    });
   }
 }
