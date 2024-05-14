@@ -1,10 +1,10 @@
 import Select from "react-select";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import {
   FormWrapper,
-  CityNameInput,
   SearchButton,
+  InputWrapper,
 } from "@/geolocation/components/city-form/city-form.styles";
 import { useGetAllCities } from "@/ibge/hooks/use-get-all-cities";
 
@@ -13,23 +13,26 @@ type Option = {
   value: string;
 };
 
-type LocateCitySchema = {
-  cityName: string;
+type CityFormSchema = {
+  cityName: Option | null;
 };
 
 export const CityForm = () => {
-  const { register, handleSubmit } = useForm<LocateCitySchema>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CityFormSchema>({
+    defaultValues: { cityName: null },
+  });
   const navigate = useNavigate();
-  const { data: cityOptions } = useGetAllCities((data): Option[] =>
-    data.map(({ name, state, stateCode }) => {
-      return { label: `${name}/${stateCode}`, value: `${name},${state}` };
+  const { data: cityOptions } = useGetAllCities<Option[]>((data) =>
+    data.map(({ name, stateCode }) => {
+      return { label: `${name}/${stateCode}`, value: `${name}` };
     })
   );
 
-  const filterOption = (
-    option: { label: string; value: string },
-    rawInput: string
-  ) => {
+  const filterOption = (option: Option, rawInput: string) => {
     const isLessThanTwo = (n: number) => n < 2;
 
     if (isLessThanTwo(rawInput.length)) {
@@ -37,8 +40,7 @@ export const CityForm = () => {
     }
 
     const trimString = (str: string) => str.replace(/^\s+|\s+$/g, "");
-    const stringify = (option: { label: string; value: string }) =>
-      `${option.label} ${option.value}`;
+    const stringify = (option: Option) => `${option.label} ${option.value}`;
 
     const input = trimString(rawInput).toLowerCase();
     const candidate = trimString(stringify(option)).toLowerCase();
@@ -46,25 +48,37 @@ export const CityForm = () => {
     return candidate.indexOf(input) > -1;
   };
 
-  const onSubmit: SubmitHandler<LocateCitySchema> = ({ cityName }) => {
-    navigate(`/weather/${cityName}`);
+  const handleFormSubmit: SubmitHandler<CityFormSchema> = ({ cityName }) => {
+    navigate(`/weather/${cityName?.value}`);
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-      <CityNameInput placeholder="Nome da cidade" {...register("cityName")} />
-      <Select
-        placeholder="Nome da cidade"
-        options={cityOptions}
-        styles={{
-          container: (base) => ({
-            ...base,
-            width: "250px",
-            height: "40px",
-          }),
-        }}
-        filterOption={filterOption}
-      />
+    <FormWrapper onSubmit={handleSubmit(handleFormSubmit)}>
+      <InputWrapper>
+        <Controller
+          name="cityName"
+          control={control}
+          rules={{ required: "Selecione uma cidade válida" }}
+          render={({ field }) => {
+            return (
+              <Select
+                {...field}
+                filterOption={filterOption}
+                options={cityOptions}
+                placeholder="Nome da cidade"
+                styles={{
+                  container: (base) => ({
+                    ...base,
+                    width: "250px",
+                    height: "40px",
+                  }),
+                }}
+              />
+            );
+          }}
+        />
+        {errors.cityName && <span>{errors.cityName.message}</span>}
+      </InputWrapper>
       <SearchButton>Buscar</SearchButton>
     </FormWrapper>
   );
