@@ -27,8 +27,8 @@ export const CityForm = () => {
   });
   const navigate = useNavigate();
   const { data: cityOptions } = useGetAllCities<Option[]>((data) =>
-    data.map(({ name, stateCode }) => {
-      return { label: `${name}/${stateCode}`, value: `${name}` };
+    data.map(({ name, state, stateCode }) => {
+      return { label: `${name}/${stateCode}`, value: `${name},${state}` };
     })
   );
 
@@ -49,7 +49,9 @@ export const CityForm = () => {
   };
 
   const handleFormSubmit: SubmitHandler<CityFormSchema> = ({ cityName }) => {
-    navigate(`/weather/${cityName?.value}`);
+    const [city, state] = cityName ? cityName.value.split(",") : [];
+
+    navigate(`/weather/${state}/${city}`);
   };
 
   return (

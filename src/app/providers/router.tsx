@@ -9,7 +9,7 @@ export const AppRouterProvider = () => {
       element: <LocateCityPage />,
     },
     {
-      path: "weather/:cityName",
+      path: "weather/:state/:cityName",
       element: <CityWeather />,
     },
   ]);
