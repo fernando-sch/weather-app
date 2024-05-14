@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { City, buildCityDTO } from "@/ibge/dto/city";
 import { IBGEService } from "@/ibge/service";
 
-export const useGetAllCities = () => {
+export const useGetAllCities = (select?: (data: City[]) => any) => {
   const ibgeService = new IBGEService();
 
   const getAllCities = async () => {
@@ -11,5 +11,9 @@ export const useGetAllCities = () => {
       .then(({ data }) => data.map(buildCityDTO));
   };
 
-  return useQuery<City[]>({ queryKey: ["getAllCities"], queryFn: getAllCities });
+  return useQuery({
+    queryKey: ["getAllCities"],
+    queryFn: getAllCities,
+    select,
+  });
 };
