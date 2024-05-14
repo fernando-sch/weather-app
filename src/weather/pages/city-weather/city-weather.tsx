@@ -13,8 +13,8 @@ import {
 
 export const CityWeather = () => {
   const navigate = useNavigate();
-  const { cityName } = useParams();
-  const { data: cityLocation } = useGetCityLocation(cityName);
+  const { cityName, state } = useParams();
+  const { data: cityLocation } = useGetCityLocation(cityName, state);
   const { data: locationWeather } = useGetLocationWeather(
     cityLocation?.lat,
     cityLocation?.lon

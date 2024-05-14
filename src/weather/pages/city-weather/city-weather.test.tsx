@@ -28,7 +28,7 @@ describe("CityWeather", () => {
   it("should render component with city weather", async () => {
     vi.mock("react-router-dom", async () => ({
       ...(await vi.importActual("react-router-dom")),
-      useParams: () => ({ cityName: "Curitiba" }),
+      useParams: () => ({ state: "Paraná", cityName: "Curitiba" }),
     }));
 
     renderComponent(<CityWeather />);
