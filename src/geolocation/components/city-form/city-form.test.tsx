@@ -50,7 +50,9 @@ describe("CityForm", () => {
       const selectOption = screen.getByText(/Cabixi\/RO/);
       user.click(selectOption);
       user.click(submitButton);
-      expect(global.window.location.href).toContain("/weather/Cabixi");
+      expect(decodeURI(global.window.location.href)).toContain(
+        "/weather/Rondônia/Cabixi"
+      );
     });
   });
 });
