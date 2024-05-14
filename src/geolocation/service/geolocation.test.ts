@@ -19,7 +19,7 @@ describe("GeolocationService", () => {
 
       const {
         data: [remoteGeolocation],
-      } = await geolocationService.getCityLocation("Curitiba,BR");
+      } = await geolocationService.getCityLocation("Curitiba", "Paraná");
 
       expect(remoteGeolocation.lat).toBe(-25.4295963);
       expect(remoteGeolocation.lon).toBe(-49.2712724);
