@@ -2,16 +2,13 @@ import { describe, it, expect } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CityForm } from "@/geolocation/components/city-form";
-import {
-  renderComponent,
-  startOpenWeatherMockServer,
-} from "@/__tests__/helpers";
+import { renderComponent, startIBGEMockServer } from "@/__tests__/helpers";
 
 describe("CityForm", () => {
-  let server: ReturnType<typeof startOpenWeatherMockServer>;
+  let server: ReturnType<typeof startIBGEMockServer>;
 
   beforeEach(() => {
-    server = startOpenWeatherMockServer();
+    server = startIBGEMockServer();
   });
 
   afterEach(() => {
@@ -21,22 +18,39 @@ describe("CityForm", () => {
   it("should render component", () => {
     renderComponent(<CityForm />);
 
-    expect(screen.getByPlaceholderText(/Nome da cidade/)).toBeDefined();
+    expect(screen.getByText(/Nome da cidade/)).toBeDefined();
+    expect(screen.getByRole("combobox")).toBeDefined();
     expect(screen.getByRole("button", { name: /Buscar/ })).toBeDefined();
+  });
+
+  it("should validate city name input", async () => {
+    const user = userEvent.setup();
+    renderComponent(<CityForm />);
+
+    const submitButton = screen.getByRole("button", { name: /Buscar/ });
+
+    user.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Selecione uma cidade válida/)).toBeDefined();
+    });
   });
 
   it("should navigate to location weather page", async () => {
     const user = userEvent.setup();
     renderComponent(<CityForm />);
 
-    const cityInput = screen.getByPlaceholderText(/Nome da cidade/);
+    const cityInput = screen.getByRole("combobox");
     const submitButton = screen.getByRole("button", { name: /Buscar/ });
 
-    await user.type(cityInput, "Curitiba");
-    user.click(submitButton);
+    user.click(cityInput);
+    user.keyboard("cab");
 
     await waitFor(() => {
-      expect(global.window.location.href).toContain("/weather/Curitiba");
+      const selectOption = screen.getByText(/Cabixi\/RO/);
+      user.click(selectOption);
+      user.click(submitButton);
+      expect(global.window.location.href).toContain("/weather/Cabixi");
     });
   });
 });

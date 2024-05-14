@@ -4,25 +4,21 @@ export const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   background-color: #f2f2f2;
   border-radius: 4px;
+  gap: 15px;
   width: 300px;
-  height: 150px;
+  margin-top: 20px;
 `;
 
-export const CityNameInput = styled.input`
-  color: #bababa;
-  font-size: 1.3rem;
-  background-color: #f2f2f2;
-  border: 2px solid #bababa;
-  border-raidus: 4px;
-  width: 250px;
-  height: 40px;
+export const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60px;
 
-  &::placeholder {
-    font-weight: bold;
-    text-align: center;
+  span {
+    color: #c43232;
   }
 `;
 

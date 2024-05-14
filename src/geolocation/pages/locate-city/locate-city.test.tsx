@@ -8,7 +8,7 @@ describe("LocateCity", () => {
     renderComponent(<LocateCityPage />);
 
     expect(screen.getByText(/Weather App/)).toBeDefined();
-    expect(screen.getByPlaceholderText(/Nome da cidade/)).toBeDefined();
+    expect(screen.getByText(/Nome da cidade/)).toBeDefined();
     expect(screen.getByRole("button", { name: /Buscar/ })).toBeDefined();
   });
 });
