@@ -18,14 +18,27 @@ describe("useGetCityLocation", () => {
   });
 
   it("shouldn't fetch data if city name is undefined", async () => {
-    const { result } = renderCustomHook(useGetCityLocation);
+    const { result } = renderCustomHook(() =>
+      useGetCityLocation(undefined, "Paraná")
+    );
+
+    expect(result.current.data).toBeUndefined();
+    expect(result.current.fetchStatus).toBe("idle");
+  });
+
+  it("should't fetch data if the state is undefined", async () => {
+    const { result } = renderCustomHook(() =>
+      useGetCityLocation("Curitiba", undefined)
+    );
 
     expect(result.current.data).toBeUndefined();
     expect(result.current.fetchStatus).toBe("idle");
   });
 
   it("should return city geolocation if city name is defined", async () => {
-    const { result } = renderCustomHook(() => useGetCityLocation("Curitiba"));
+    const { result } = renderCustomHook(() =>
+      useGetCityLocation("Curitiba", "Paraná")
+    );
 
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
