@@ -15,7 +15,7 @@ describe("useGetAllCities", () => {
   });
 
   it("should return a list of cities", async () => {
-    const { result } = renderCustomHook(useGetAllCities);
+    const { result } = renderCustomHook(() => useGetAllCities());
 
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
@@ -25,8 +25,8 @@ describe("useGetAllCities", () => {
 
   it("should transform the data based on the select function", async () => {
     const { result } = renderCustomHook(() =>
-      useGetAllCities((data) =>
-        data.map(({ name, stateCode }) => {
+      useGetAllCities<{ name: string }[]>((data) =>
+        data.map(({ name, stateCode }): { name: string } => {
           return { name: `${name}/${stateCode}` };
         })
       )
@@ -34,7 +34,10 @@ describe("useGetAllCities", () => {
 
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
-      expect(result.current.data[0].name).toBe("Alta Floresta D'Oeste/RO");
+      expect(result.current.data).toHaveLength(5);
+      expect(
+        result.current.data?.find(({ name }) => name === "Cabixi/RO")
+      ).toMatchObject({ name: "Cabixi/RO" });
     });
   });
 });
