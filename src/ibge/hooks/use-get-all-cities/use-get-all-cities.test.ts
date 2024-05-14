@@ -22,4 +22,19 @@ describe("useGetAllCities", () => {
       expect(result.current.data).toHaveLength(5);
     });
   });
+
+  it("should transform the data based on the select function", async () => {
+    const { result } = renderCustomHook(() =>
+      useGetAllCities((data) =>
+        data.map(({ name, stateCode }) => {
+          return { name: `${name}/${stateCode}` };
+        })
+      )
+    );
+
+    await waitFor(() => {
+      expect(result.current.isSuccess).toBe(true);
+      expect(result.current.data[0].name).toBe("Alta Floresta D'Oeste/RO");
+    });
+  });
 });
